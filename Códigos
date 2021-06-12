@@ -1,0 +1,15 @@
+Temperatura: 
+
+ntfc.payload = (5.0 * msg.payload * 100.0) / 1024.0; 
+return ntfc; 
+
+
+
+Cooler Acionado: 
+
+var num = ntfc.payload; 
+if (num >= 26){ 
+ntfc.payload = true; 
+}else{ 
+ntfc.payload = false;
+ } return ntfc; 
