@@ -1,15 +1,23 @@
 Temperatura: 
 
-ntfc.payload = (5.0 * msg.payload * 100.0) / 1024.0; 
-return ntfc; 
-
-
+msg.payload = (msg.payload - 700.0) / 10.0; 
+return msg; 
 
 Cooler Acionado: 
 
-var num = ntfc.payload; 
-if (num >= 26){ 
-ntfc.payload = true; 
-}else{ 
-ntfc.payload = false;
- } return ntfc; 
+var num = msg.payload; 
+if (num >= 22){
+msg.payload = true; }
+else{
+msg.payload = false;
+}
+return msg;
+
+
+Boolean
+var string = msg.payload;
+if (string == "true"){
+msg.payload = true; }
+else{
+msg.payload = false; } 
+return msg;
