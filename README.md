@@ -10,9 +10,8 @@ A figura abaixo representa a conexão para este projeto:
 ![image](https://user-images.githubusercontent.com/50816053/121760274-3126d880-cb00-11eb-97e0-b58a61d68711.png)
 
 
-Foi realizado a conexão de todos os componentes físicos em um computador para iniciarmos a execução. Iniciamos a comunicação do Arduino com o protocolo Firmata, sendo realizado com êxito através do sketch de exemplos (Firmata > StandardFirmata) no software IDE do Arduino. 
-Logo após, abrimos o Node-Red com todos os componentes já conectados e com todas as devidas funções definidas. O MQTT é o responsável pela comunicação do dispostivo Arduino para com o dashboard, que recebe automaticamente, todas as informações da temperatura para assim acionar o Air Cooler.  
+Após a conclusão da conexão física dos componentes e a conexão via USB com um computador, partimos para a configuração e metodologia de execução do projeto, inicializando os componentes lógicos da aplicação. Primeiro, é necessário carregar o protocolo Firmata no nosso microcontrolador, para a comunicação com o Arduino ocorrer de forma efetiva, após isso iniciamos a aplicação Node-Red que vai trabalhar como servidor, na figura a seguir temos a montagem dos nodes da aplicação, começando pelo LM35 e terminando com o acionamento do cooler.    
 ![image](https://user-images.githubusercontent.com/50816053/142439329-c9b80a74-1202-4b58-8771-507480945448.png)
 
-Após o deploy, abrimos o dashboard para acompanharmos se a temperatura de 23º graus celsius (definido na função no Node-Red) é atingido para acionar o Air Cooler. Conforme a imagem a seguir, vemos que ao alcançar a temperatura, o switch é alterado para On e o Air Cooler é ativado:
+O dashboard para acompanharmos se a temperatura de 22º graus celsius (definido na função no Node-Red) é atingido para acionar o Air Cooler. Conforme a imagem a seguir, vemos que ao alcançar a temperatura, o switch é alterado para On e o Air Cooler é ativado:
 ![image](https://user-images.githubusercontent.com/50816053/142441169-f512f81b-2d0f-406b-bf92-9a791b59acb2.png)
