@@ -1,0 +1,369 @@
+[
+    {
+        "id": "289cd2ec24b616fa",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e057921676151f1b",
+        "type": "comment",
+        "z": "289cd2ec24b616fa",
+        "name": "PUB",
+        "info": "",
+        "x": 230,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e55eef6af246638d",
+        "type": "comment",
+        "z": "289cd2ec24b616fa",
+        "name": "SUB",
+        "info": "",
+        "x": 170,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "eaf3cbd27fb34335",
+        "type": "arduino in",
+        "z": "289cd2ec24b616fa",
+        "name": "LM35",
+        "pin": "2",
+        "state": "ANALOG",
+        "arduino": "31dfb9d6cc6f2315",
+        "x": 340,
+        "y": 220,
+        "wires": [
+            [
+                "743c633d280cae14"
+            ]
+        ]
+    },
+    {
+        "id": "743c633d280cae14",
+        "type": "function",
+        "z": "289cd2ec24b616fa",
+        "name": "Conversor de Temperatura",
+        "func": "msg.payload = (msg.payload - 700.0) / 10.0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 220,
+        "wires": [
+            [
+                "223af4a90fedc377"
+            ]
+        ]
+    },
+    {
+        "id": "223af4a90fedc377",
+        "type": "mqtt out",
+        "z": "289cd2ec24b616fa",
+        "name": "sensor/temp",
+        "topic": "sensor/temp",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8b88ff031bb49efb",
+        "x": 810,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "d6e3014ccdc03129",
+        "type": "mqtt in",
+        "z": "289cd2ec24b616fa",
+        "name": "sensor/temp",
+        "topic": "sensor/temp",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "8b88ff031bb49efb",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 380,
+        "wires": [
+            [
+                "184aaf53981e5d7b"
+            ]
+        ]
+    },
+    {
+        "id": "418943f0054e8ed8",
+        "type": "ui_gauge",
+        "z": "289cd2ec24b616fa",
+        "name": "",
+        "group": "b9bcc36add76cee1",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatura",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "10",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 710,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "184aaf53981e5d7b",
+        "type": "delay",
+        "z": "289cd2ec24b616fa",
+        "name": "Limite",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 360,
+        "wires": [
+            [
+                "418943f0054e8ed8",
+                "73e42774bd739ba1"
+            ]
+        ]
+    },
+    {
+        "id": "73e42774bd739ba1",
+        "type": "function",
+        "z": "289cd2ec24b616fa",
+        "name": "On/Off",
+        "func": "var num = msg.payload; \nif (num >= 22){\nmsg.payload = true; }\nelse{\nmsg.payload = false;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 440,
+        "wires": [
+            [
+                "3bc68dc9efdb84ab"
+            ]
+        ]
+    },
+    {
+        "id": "f96b6cfccfebc40d",
+        "type": "mqtt out",
+        "z": "289cd2ec24b616fa",
+        "name": "fan on/off",
+        "topic": "fan on/off",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8b88ff031bb49efb",
+        "x": 890,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "31b37be01219cd8d",
+        "type": "mqtt in",
+        "z": "289cd2ec24b616fa",
+        "name": "fan on/off",
+        "topic": "fan on/off",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "8b88ff031bb49efb",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 520,
+        "wires": [
+            [
+                "82e487e5be019203"
+            ]
+        ]
+    },
+    {
+        "id": "82e487e5be019203",
+        "type": "delay",
+        "z": "289cd2ec24b616fa",
+        "name": "Delay 2",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 520,
+        "wires": [
+            [
+                "8ba32b66e06ffc0e"
+            ]
+        ]
+    },
+    {
+        "id": "8ba32b66e06ffc0e",
+        "type": "function",
+        "z": "289cd2ec24b616fa",
+        "name": "Boolean",
+        "func": "var string = msg.payload;\nif (string == \"true\"){\nmsg.payload = true; }\nelse{\nmsg.payload = false; } \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 600,
+        "wires": [
+            [
+                "a80d7eb35f4e753b",
+                "7b1414e4fd03adc8"
+            ]
+        ]
+    },
+    {
+        "id": "a80d7eb35f4e753b",
+        "type": "arduino out",
+        "z": "289cd2ec24b616fa",
+        "name": "FAN",
+        "pin": "3",
+        "state": "OUTPUT",
+        "arduino": "31dfb9d6cc6f2315",
+        "x": 710,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "3bc68dc9efdb84ab",
+        "type": "ui_switch",
+        "z": "289cd2ec24b616fa",
+        "name": "",
+        "label": "Switch",
+        "tooltip": "",
+        "group": "b9bcc36add76cee1",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "x": 730,
+        "y": 460,
+        "wires": [
+            [
+                "f96b6cfccfebc40d"
+            ]
+        ]
+    },
+    {
+        "id": "7b1414e4fd03adc8",
+        "type": "debug",
+        "z": "289cd2ec24b616fa",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "31dfb9d6cc6f2315",
+        "type": "arduino-board",
+        "device": "/dev/cu.usbserial-1420"
+    },
+    {
+        "id": "8b88ff031bb49efb",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b9bcc36add76cee1",
+        "type": "ui_group",
+        "name": "Temperatura",
+        "tab": "8a904b0cf7d70977",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "8a904b0cf7d70977",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
