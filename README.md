@@ -3,6 +3,14 @@ Sensor de Temperatura com Arejamento
 
 Alunas: Lethícia Marquezini 31740456 / Sthephany Chuber 31709311
 
+Materiais Utilizados
+- Arduino Uno
+- Protoboard 400 pontos
+- 7 Jumpers Fêmea/Fêmea
+- Resistor 10KΩ
+- 1 Sensor de Temperatura
+- Micro Air Cooler 5V
+
 Descrição do projeto realizado:
 
 A princípio todos os materiais físicos serão juntados e montados (fios, resistores, jumpers, sensor de temperatura e air cooler). Após esse processo, a USB será conectada no computador e começaremos pelo carregamento do protocolo Firmata no microcontrolador para comunicar com o Arduino de forma adequada. Logo após, começa-se a aplicação Node-RED que irá trabalhar com o servidor e consequentemente iniciará o processo de medição da temperatura para ativar o ventilador.
